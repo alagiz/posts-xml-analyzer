@@ -2,8 +2,6 @@ package com.xml.analyzer.parser.posts.sax;
 
 import com.xml.analyzer.node.XmlNode;
 import com.xml.analyzer.result.Result;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.xml.sax.InputSource;
@@ -17,8 +15,6 @@ import java.net.URL;
  */
 @Component
 public class SaxXmlParser {
-    @Getter
-    @Setter
     @Autowired
     private SaxXmlHandler saxXmlHandler;
 

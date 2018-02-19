@@ -3,7 +3,6 @@ package com.xml.analyzer.parser.posts.sax;
 import com.xml.analyzer.node.XmlNode;
 import com.xml.analyzer.result.Result;
 import com.xml.analyzer.result.ResultDetails;
-import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.xml.sax.Attributes;
@@ -15,11 +14,9 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 @Component
 public class SaxXmlHandler extends DefaultHandler {
-    @Getter
     @Setter
     private XmlNode xmlNode;
 
-    @Getter
     @Setter
     private Result result;
 
