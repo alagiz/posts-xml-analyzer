@@ -1,11 +1,21 @@
 package com.xml.analyzer.parser;
 
+import com.xml.analyzer.node.XmlNode;
 import com.xml.analyzer.result.Result;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public interface XmlParser {
-    void parseXMLFromUrl(String url);
+public abstract class XmlParser {
+    @Getter
+    @Setter
+    @Autowired
+    private XmlNode xmlNode;
 
-    void setParsingDate();
+    @Getter
+    @Setter
+    @Autowired
+    public Result result;
 
-    Result getParsingResults();
+    public abstract Result parseXMLFromUrl(String url);
 }

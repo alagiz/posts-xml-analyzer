@@ -4,6 +4,7 @@ import com.xml.analyzer.result.ResultDetails;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 import org.xml.sax.Attributes;
 
 import java.time.ZoneId;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Component
 public class PostsResultDetails implements ResultDetails {
     @Getter
     @Setter
