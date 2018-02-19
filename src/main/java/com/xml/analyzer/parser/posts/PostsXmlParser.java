@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * Specific "posts" implementation of XmlParser.
+ */
 @Component
 public class PostsXmlParser extends XmlParser {
     @Getter

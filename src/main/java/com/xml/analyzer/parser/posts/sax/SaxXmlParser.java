@@ -12,6 +12,9 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.net.URL;
 
+/**
+ * Sax parser implementation. Parses XML from an input stream from the given url.
+ */
 @Component
 public class SaxXmlParser {
     @Getter

@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+/**
+ * This class represents a node in an XML document
+ */
 @Component
 public class XmlNode {
     @Getter

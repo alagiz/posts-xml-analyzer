@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Specific "posts" implementation of ResultDetails.
+ * Contains methods with logic for accumulating data for the xml parsing Result.
+ */
 @Component
 public class PostsResultDetails implements ResultDetails {
     @Getter
