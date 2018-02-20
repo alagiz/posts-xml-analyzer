@@ -30,7 +30,7 @@ public class SaxXmlHandler extends DefaultHandler {
         if (xmlNode.getName().equals(qName)) {
             xmlNode.setInsideThisNode(true);
             resultDetails.resetDetails();
-        } else {
+        } else if (xmlNode.isInsideThisNode()){
             resultDetails.accumulateDetails(qName, attrs);
         }
     }
