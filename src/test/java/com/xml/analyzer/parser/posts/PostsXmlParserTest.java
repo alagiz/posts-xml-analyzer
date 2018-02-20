@@ -1,6 +1,6 @@
-package com.xml.analyzer.controller;
+package com.xml.analyzer.parser.posts;
 
-import com.xml.analyzer.parser.posts.PostsXmlParser;
+import com.xml.analyzer.parser.posts.sax.SaxXmlParser;
 import com.xml.analyzer.result.Result;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,16 +11,17 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class XmlAnalyzerControllerTest {
+public class PostsXmlParserTest {
     @InjectMocks
-    private XmlAnalyzerController xmlAnalyzerController;
+    private PostsXmlParser postsXmlParser;
 
     @Mock
-    private PostsXmlParser postsXmlParser;
+    private SaxXmlParser saxXmlParser;
 
     @Mock
     private Result result;
@@ -29,11 +30,11 @@ public class XmlAnalyzerControllerTest {
     public void init() {
         MockitoAnnotations.initMocks(this);
 
-        when(postsXmlParser.parseXMLFromUrl(anyString())).thenAnswer(invocationOnMock -> result);
+        when(saxXmlParser.parseXMLFromUrl(anyString(), any(), any())).thenAnswer(invocationOnMock -> result);
     }
 
     @Test
-    public void testAnalyzePosts() {
-        assertTrue(xmlAnalyzerController.analyzePosts("test") != null);
+    public void testParseXMLFromUrl() {
+        assertTrue(postsXmlParser.parseXMLFromUrl("test") != null);
     }
 }

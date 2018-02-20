@@ -18,7 +18,7 @@ public class SaxXmlParser {
     @Autowired
     private SaxXmlHandler saxXmlHandler;
 
-    public void parseXMLFromUrl(String url, XmlNode xmlNode, Result result) {
+    public Result parseXMLFromUrl(String url, XmlNode xmlNode, Result result) {
         saxXmlHandler.setResult(result);
         saxXmlHandler.setXmlNode(xmlNode);
 
@@ -31,5 +31,9 @@ public class SaxXmlParser {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+
+        result.setAnalysisDate(Result.getAnalysisDate());
+
+        return result;
     }
 }

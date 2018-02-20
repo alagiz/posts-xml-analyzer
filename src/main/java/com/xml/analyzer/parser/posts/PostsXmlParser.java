@@ -34,10 +34,6 @@ public class PostsXmlParser extends XmlParser {
 
     @Override
     public Result parseXMLFromUrl(String url) {
-        saxXmlParser.parseXMLFromUrl(url, getXmlNode(), getResult());
-
-        getResult().setAnalysisDate(Result.getAnalysisDate());
-
-        return getResult();
+        return saxXmlParser.parseXMLFromUrl(url, getXmlNode(), getResult());
     }
 }
