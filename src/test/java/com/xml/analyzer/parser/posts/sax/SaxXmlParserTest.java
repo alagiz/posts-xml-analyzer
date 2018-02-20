@@ -4,9 +4,11 @@ import com.xml.analyzer.node.XmlNode;
 import com.xml.analyzer.result.Result;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.xml.parsers.SAXParserFactory;
 
@@ -16,6 +18,7 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SaxXmlParserTest {
     @InjectMocks
     private SaxXmlParser saxXmlParser;
@@ -39,8 +42,5 @@ public class SaxXmlParserTest {
     @Test
     public void testParseXMLFromUrl() {
         assertTrue(saxXmlParser.parseXMLFromUrl("test", xmlNode, result) != null);
-
-//        SAXParserFactory saxFactory = mock(SAXParserFactory.class);
-
     }
 }

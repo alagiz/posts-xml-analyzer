@@ -3,17 +3,20 @@ package com.xml.analyzer.result.posts;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+@RunWith(MockitoJUnitRunner.class)
 public class PostsResultDetailsTest {
+    @InjectMocks
     private PostsResultDetails postsResultDetails;
 
     @Before
     public void setUp() throws Exception {
-        postsResultDetails = new PostsResultDetails();
-
         postsResultDetails.resetDetails();
     }
 

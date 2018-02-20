@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Rest controller, provides endpoint for /analyze/
+ * Rest controller, provides /analyze/ endpoint
  */
 @RestController
 @RequestMapping("/analyze")

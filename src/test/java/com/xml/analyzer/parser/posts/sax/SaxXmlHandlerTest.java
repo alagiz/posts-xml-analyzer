@@ -5,15 +5,18 @@ import com.xml.analyzer.result.Result;
 import com.xml.analyzer.result.ResultDetails;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.xml.sax.Attributes;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SaxXmlHandlerTest {
     @InjectMocks
     private SaxXmlHandler saxXmlHandler;
