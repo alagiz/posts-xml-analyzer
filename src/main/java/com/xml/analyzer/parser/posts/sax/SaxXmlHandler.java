@@ -10,7 +10,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * SaxHandler implementation. Listens to start and end of XML elements.
+ * SaxHandler implementation. Detects start and end of XML elements.
+ * Delegates updating of parsing result to an instance of ResultDetails.
  */
 @Component
 public class SaxXmlHandler extends DefaultHandler {

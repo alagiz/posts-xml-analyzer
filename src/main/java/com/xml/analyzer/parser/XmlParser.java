@@ -7,7 +7,8 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * XmlParser. Concrete subclasses are obliged to implement parseXmlFromUrl method.
+ * XmlParser. Concrete subclasses that extend from that class
+ * are obliged to implement parseXmlFromUrl method.
  */
 public abstract class XmlParser {
     @Getter
