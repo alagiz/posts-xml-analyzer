@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.time.ZonedDateTime;
 
 /**
- * Result of xml analysis. Contains static method to return current date.
+ * Result of xml analysis. Contains static method to return date of analysis.
  */
 @Component
 public class Result {
