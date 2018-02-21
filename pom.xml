@@ -10,6 +10,7 @@
         <java.version>1.8</java.version>
         <mock-sever-netty-version>3.10.8</mock-sever-netty-version>
         <apche-http-version>4.4.1</apche-http-version>
+        <powermock.version>1.7.1</powermock.version>
     </properties>
 
     <parent>
@@ -60,6 +61,18 @@
             <artifactId>httpcore</artifactId>
             <version>${apche-http-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -67,6 +80,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.mock-server</groupId>
@@ -76,7 +96,7 @@
                     <serverPort>1080</serverPort>
                     <proxyPort>1090</proxyPort>
                     <logLevel>DEBUG</logLevel>
-                    <initializationClass>org.mockserver.maven.ExampleInitializationClass</initializationClass>
+                    <initializationClass>com.xml.analyzer.App</initializationClass>
                 </configuration>
                 <executions>
                     <execution>

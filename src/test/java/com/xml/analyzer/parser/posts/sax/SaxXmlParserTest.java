@@ -9,16 +9,28 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.xml.sax.InputSource;
 
+import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(URL.class)
 public class SaxXmlParserTest {
     @InjectMocks
     private SaxXmlParser saxXmlParser;
@@ -33,14 +45,35 @@ public class SaxXmlParserTest {
     private Result result;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        when(saxXmlParser.parseXMLFromUrl(anyString(), any(), any())).thenAnswer(invocationOnMock -> result);
+//        SAXParserFactory spf = mock(SAXParserFactory.class);
+//        SAXParser sp = mock(SAXParser.class);
+//        InputSource is = mock(InputSource.class);
+//        URL url = PowerMockito.mock(URL.class);
+
+//        InputStream ist = mock(InputStream.class);
+//        HttpURLConnection huc = PowerMockito.mock(HttpURLConnection.class);
+//        PowerMockito.when(url.openConnection()).thenReturn(huc);
+//        PowerMockito.when(huc.getResponseCode()).thenReturn(200);
+//
+////        when(spf.newInstance()).thenAnswer(invocationOnMock -> spf);
+//        when(spf.newSAXParser()).thenReturn(sp);
+////        when(new URL(anyString())).thenAnswer(invocationOnMock -> url);
+//        when(url.openStream()).thenAnswer(invocationOnMock -> ist);
+//        PowerMockito.whenNew(InputSource.class).withArguments(java.io.Reader.class).thenAnswer(invocationOnMock -> ist);
+//        PowerMockito.whenNew(URL.class).withArguments(anyString()).thenReturn(url);
+////        when(InputSource.class).
+//        doNothing().when(sp).parse(is, saxXmlHandler);
+
+//        when(saxXmlParser.parseXMLFromUrl(anyString(), any(), any())).thenAnswer(invocationOnMock -> result);
     }
 
     @Test
     public void testParseXMLFromUrl() {
-        assertTrue(saxXmlParser.parseXMLFromUrl("test", xmlNode, result) != null);
+//        assertTrue(saxXmlParser.parseXMLFromUrl("http://localhost", xmlNode, result) != null);
+
+
     }
 }
