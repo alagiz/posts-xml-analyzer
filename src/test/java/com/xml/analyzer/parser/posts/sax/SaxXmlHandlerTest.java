@@ -46,8 +46,8 @@ public class SaxXmlHandlerTest {
     public void testStartElementNotInsideXmlNode() throws Exception {
         saxXmlHandler.startElement("namespaceURI", "localName", "xmlNodeName", attrs);
 
-        verify(xmlNode).getName();
-        verify(resultDetails).resetDetails();
+        verify(xmlNode, times(1)).getName();
+        verify(resultDetails, times(1)).resetDetails();
         verify(resultDetails, never()).accumulateDetails(anyString(), eq(attrs));
     }
 
@@ -55,9 +55,9 @@ public class SaxXmlHandlerTest {
     public void testStartElementIsInsideXmlNode() throws Exception {
         saxXmlHandler.startElement("namespaceURI", "localName", "xmlNodeNameInside", attrs);
 
-        verify(xmlNode).getName();
-        verify(resultDetails).accumulateDetails(anyString(), eq(attrs));
-        verify(xmlNode).isInsideThisNode();
+        verify(xmlNode, times(1)).getName();
+        verify(resultDetails, times(1)).accumulateDetails(anyString(), eq(attrs));
+        verify(xmlNode, times(1)).isInsideThisNode();
         verify(resultDetails, never()).resetDetails();
     }
 
@@ -65,8 +65,8 @@ public class SaxXmlHandlerTest {
     public void testEndElement() throws Exception {
         saxXmlHandler.endElement("namespaceURI", "localName", "xmlNodeName");
 
-        verify(xmlNode).getName();
-        verify(xmlNode).isInsideThisNode();
-        verify(xmlNode).setInsideThisNode(anyBoolean());
+        verify(xmlNode, times(1)).getName();
+        verify(xmlNode, times(1)).isInsideThisNode();
+        verify(xmlNode, times(1)).setInsideThisNode(anyBoolean());
     }
 }
