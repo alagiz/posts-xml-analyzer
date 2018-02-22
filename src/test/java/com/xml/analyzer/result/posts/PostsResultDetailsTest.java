@@ -70,6 +70,14 @@ public class PostsResultDetailsTest {
     }
 
     @Test
+    public void testFinalizeResultDetails() {
+        postsResultDetails.setAverageScore(0.11235);
+        postsResultDetails.finalizeResultDetails();
+
+        assertEquals(postsResultDetails.getAverageScore(), 0.112, 0);
+    }
+
+    @Test
     public void testUpdatePostCount() {
         when(attrs.getValue("Id")).thenReturn("0");
 

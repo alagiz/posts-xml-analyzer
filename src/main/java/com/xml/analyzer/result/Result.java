@@ -22,7 +22,13 @@ public class Result {
     @JsonProperty("details")
     private ResultDetails resultDetails;
 
-    public static ZonedDateTime getAnalysisDate() {
+    private static ZonedDateTime getAnalysisDate() {
         return ZonedDateTime.now();
+    }
+
+    public void finalizeResult() {
+        setAnalysisDate(Result.getAnalysisDate());
+
+        getResultDetails().finalizeResultDetails();
     }
 }

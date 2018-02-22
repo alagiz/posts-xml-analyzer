@@ -55,21 +55,23 @@ public class PostsResultDetails implements ResultDetails {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private ZonedDateTime lastPostDate;
 
-    private final List<String> attributeNameList = new ArrayList<>(
-            Arrays.asList(
-                    "Id",
-                    "AnswerCount",
-                    "AcceptedAnswerId",
-                    "CommentCount",
-                    "ViewCount",
-                    "Score",
-                    "CreationDate"
-            )
-    );
+    private List<String> attributeNameList;
 
     @PostConstruct
     public void init() {
         resetDetails();
+
+        attributeNameList = new ArrayList<>(
+                Arrays.asList(
+                        "Id",
+                        "AnswerCount",
+                        "AcceptedAnswerId",
+                        "CommentCount",
+                        "ViewCount",
+                        "Score",
+                        "CreationDate"
+                )
+        );
     }
 
     @Override
@@ -123,6 +125,11 @@ public class PostsResultDetails implements ResultDetails {
                         }
                     });
         }
+    }
+
+    @Override
+    public void finalizeResultDetails() {
+        setAverageScore(Math.round(getAverageScore() * 1000) / 1000.0);
     }
 
     private void updatePostCount() {

@@ -9,6 +9,7 @@ import org.xml.sax.InputSource;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -24,17 +25,23 @@ public class SaxXmlParser {
         saxXmlHandler.setXmlNode(xmlNode);
 
         try {
-            SAXParserFactory spf = SAXParserFactory.newInstance();
-            SAXParser sp = spf.newSAXParser();
-            URL linkURL = new URL(url);
-
-            sp.parse(new InputSource(linkURL.openStream()), saxXmlHandler);
+            parseStreamFromUrl(url);
         } catch (Exception parseException) {
             throw new ParseException(parseException.getMessage());
         }
 
-        result.setAnalysisDate(Result.getAnalysisDate());
+        result.finalizeResult();
 
         return result;
+    }
+
+    private void parseStreamFromUrl(String url) throws Exception {
+        SAXParserFactory spf = SAXParserFactory.newInstance();
+        SAXParser sp = spf.newSAXParser();
+        URL linkURL = new URL(url);
+
+        try (InputStream inputStream = linkURL.openStream()) {
+            sp.parse(new InputSource(inputStream), saxXmlHandler);
+        }
     }
 }

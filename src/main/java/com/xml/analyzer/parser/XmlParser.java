@@ -26,7 +26,7 @@ public abstract class XmlParser {
     public static class ParseException extends Exception {
 
         public ParseException(String msg) {
-            super(msg);
+            super("Exception thrown during xml parsing:" + msg);
         }
     }
 }
