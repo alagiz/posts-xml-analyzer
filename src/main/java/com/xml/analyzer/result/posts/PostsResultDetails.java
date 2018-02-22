@@ -89,35 +89,37 @@ public class PostsResultDetails implements ResultDetails {
         if (qName.equals("row")) {
             attributeNameList
                     .forEach(attributeName -> {
-                        switch (attributeName) {
-                            case "Id":
-                                updatePostCount();
+                        if (attrs.getValue(attributeName) != null) {
+                            switch (attributeName) {
+                                case "Id":
+                                    updatePostCount();
 
-                                break;
-                            case "AnswerCount":
-                                updateAnswerCount(attrs, attributeName);
+                                    break;
+                                case "AnswerCount":
+                                    updateAnswerCount(attrs, attributeName);
 
-                                break;
-                            case "AcceptedAnswerId":
-                                updateAcceptedAnswersCount(attrs, attributeName);
+                                    break;
+                                case "AcceptedAnswerId":
+                                    updateAcceptedAnswersCount();
 
-                                break;
-                            case "CommentCount":
-                                updateCommentCount(attrs, attributeName);
+                                    break;
+                                case "CommentCount":
+                                    updateCommentCount(attrs, attributeName);
 
-                                break;
-                            case "ViewCount":
-                                updateViewCount(attrs, attributeName);
+                                    break;
+                                case "ViewCount":
+                                    updateViewCount(attrs, attributeName);
 
-                                break;
-                            case "Score":
-                                updateAvgScore(attrs, attributeName);
+                                    break;
+                                case "Score":
+                                    updateAvgScore(attrs, attributeName);
 
-                                break;
-                            case "CreationDate":
-                                updateFirstLastPostDates(attrs, attributeName);
+                                    break;
+                                case "CreationDate":
+                                    updateFirstLastPostDates(attrs, attributeName);
 
-                                break;
+                                    break;
+                            }
                         }
                     });
         }
@@ -128,34 +130,26 @@ public class PostsResultDetails implements ResultDetails {
     }
 
     private void updateAnswerCount(Attributes attrs, String attributeName) {
-        if (attrs.getValue(attributeName) != null) {
-            setTotalAnswers(getTotalAnswers() + Integer.parseInt(attrs.getValue(attributeName)));
-        }
+        setTotalAnswers(getTotalAnswers() + Integer.parseInt(attrs.getValue(attributeName)));
     }
 
-    private void updateAcceptedAnswersCount(Attributes attrs, String attributeName) {
-        if (attrs.getValue(attributeName) != null) {
-            setTotalAcceptedAnswers(getTotalAcceptedAnswers() + 1);
-        }
+    private void updateAcceptedAnswersCount() {
+        setTotalAcceptedAnswers(getTotalAcceptedAnswers() + 1);
     }
 
     private void updateCommentCount(Attributes attrs, String attributeName) {
-        if (attrs.getValue(attributeName) != null) {
-            setTotalComments(getTotalComments() + Integer.parseInt(attrs.getValue(attributeName)));
-        }
+        setTotalComments(getTotalComments() + Integer.parseInt(attrs.getValue(attributeName)));
     }
 
     private void updateViewCount(Attributes attrs, String attributeName) {
-        if (attrs.getValue(attributeName) != null) {
-            setTotalViews(getTotalViews() + Integer.parseInt(attrs.getValue(attributeName)));
-        }
+        setTotalViews(getTotalViews() + Integer.parseInt(attrs.getValue(attributeName)));
     }
 
     private void updateAvgScore(Attributes attrs, String attributeName) {
         int postCount = getTotalPosts();
         int score = Integer.parseInt(attrs.getValue(attributeName));
         double previousAvg = getAverageScore();
-        double updatedAvg = previousAvg * (postCount - 1) / postCount + score / postCount;
+        double updatedAvg = previousAvg + (score - previousAvg) / postCount;
 
         setAverageScore(updatedAvg);
     }
