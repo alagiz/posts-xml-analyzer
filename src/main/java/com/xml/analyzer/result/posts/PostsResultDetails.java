@@ -55,23 +55,21 @@ public class PostsResultDetails implements ResultDetails {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private ZonedDateTime lastPostDate;
 
-    private List<String> attributeNameList;
+    private final List<String> attributeNameList = new ArrayList<>(
+            Arrays.asList(
+                    "Id",
+                    "AnswerCount",
+                    "AcceptedAnswerId",
+                    "CommentCount",
+                    "ViewCount",
+                    "Score",
+                    "CreationDate"
+            )
+    );
 
     @PostConstruct
     public void init() {
         resetDetails();
-
-        attributeNameList = new ArrayList<>(
-                Arrays.asList(
-                        "Id",
-                        "AnswerCount",
-                        "AcceptedAnswerId",
-                        "CommentCount",
-                        "ViewCount",
-                        "Score",
-                        "CreationDate"
-                )
-        );
     }
 
     @Override
