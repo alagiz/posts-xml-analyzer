@@ -1,34 +1,19 @@
 package com.xml.analyzer.result.posts;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PostsResultDetailsTest {
     @InjectMocks
     private PostsResultDetails postsResultDetails;
 
-    @Before
-    public void setUp() throws Exception {
-        postsResultDetails.resetDetails();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        postsResultDetails = null;
-
-        assertNull(postsResultDetails);
-    }
-
     @Test
-    public void resetDetails() {
+    public void testResetDetails() {
         postsResultDetails.setAverageScore(1);
         postsResultDetails.setTotalPosts(1);
 
@@ -39,6 +24,34 @@ public class PostsResultDetailsTest {
     }
 
     @Test
-    public void accumulateDetails() {
+    public void testAccumulateDetails() {
+    }
+
+    @Test
+    public void testUpdatePostCount() {
+    }
+
+    @Test
+    public void testUpdateAnswerCount() {
+    }
+
+    @Test
+    public void testUpdateAcceptedAnswersCount() {
+    }
+
+    @Test
+    public void testUpdateCommentCount() {
+    }
+
+    @Test
+    public void testUpdateViewCount() {
+    }
+
+    @Test
+    public void testUpdateAvgScore() {
+    }
+
+    @Test
+    public void testUpdateFirstLastPostDates() {
     }
 }

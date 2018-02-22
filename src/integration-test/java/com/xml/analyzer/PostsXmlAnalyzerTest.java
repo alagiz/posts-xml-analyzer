@@ -1,5 +1,6 @@
-package com.xml.analyzer.controller;
+package com.xml.analyzer;
 
+import com.xml.analyzer.controller.XmlAnalyzerController;
 import com.xml.analyzer.result.Result;
 import com.xml.analyzer.result.posts.PostsResultDetails;
 import org.junit.BeforeClass;
@@ -14,7 +15,7 @@ import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = PostsXmlAnalyzerTestConfiguration.class)
+@ContextConfiguration(classes = com.xml.analyzer.PostsXmlAnalyzerTestConfiguration.class)
 public class PostsXmlAnalyzerTest {
     @BeforeClass
     public static void startServer() {
@@ -41,6 +42,7 @@ public class PostsXmlAnalyzerTest {
 
         PostsResultDetails details = (PostsResultDetails)result.getResultDetails();
 
+        // assert that statistics is calculated correctly
         System.out.println(details.getTotalPosts());
     }
 }

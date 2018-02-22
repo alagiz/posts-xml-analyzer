@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/analyze")
-class XmlAnalyzerController {
+public class XmlAnalyzerController {
 
     @Autowired
     private PostsXmlParser postsXmlParser;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    Result analyzePosts(@RequestParam("url") final String url) {
+    public Result analyzePosts(@RequestParam("url") final String url) {
         return postsXmlParser.parseXMLFromUrl(url);
     }
 }

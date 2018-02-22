@@ -1,5 +1,6 @@
-package com.xml.analyzer.controller;
+package com.xml.analyzer;
 
+import com.xml.analyzer.controller.XmlAnalyzerController;
 import com.xml.analyzer.node.XmlNode;
 import com.xml.analyzer.parser.posts.PostsXmlParser;
 import com.xml.analyzer.parser.posts.sax.SaxXmlHandler;
