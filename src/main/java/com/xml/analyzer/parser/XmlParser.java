@@ -21,5 +21,12 @@ public abstract class XmlParser {
     @Autowired
     public Result result;
 
-    public abstract Result parseXMLFromUrl(String url);
+    public abstract Result parseXMLFromUrl(String url) throws ParseException;
+
+    public static class ParseException extends Exception {
+
+        public ParseException(String msg) {
+            super(msg);
+        }
+    }
 }

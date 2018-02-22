@@ -1,6 +1,7 @@
 package com.xml.analyzer;
 
 import com.xml.analyzer.controller.XmlAnalyzerController;
+import com.xml.analyzer.parser.XmlParser.ParseException;
 import com.xml.analyzer.result.Result;
 import com.xml.analyzer.result.posts.PostsResultDetails;
 import org.junit.BeforeClass;
@@ -54,7 +55,7 @@ public class PostsXmlAnalyzerTest {
     private XmlAnalyzerController xmlAnalyzerController;
 
     @Test
-    public void testAnalyzePosts() {
+    public void testAnalyzePosts() throws ParseException {
         Result result = xmlAnalyzerController.analyzePosts("http://127.0.0.1:1070/xml");
         PostsResultDetails details = (PostsResultDetails) result.getResultDetails();
 

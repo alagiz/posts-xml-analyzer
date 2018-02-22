@@ -1,6 +1,7 @@
 package com.xml.analyzer.parser.posts.sax;
 
 import com.xml.analyzer.node.XmlNode;
+import com.xml.analyzer.parser.XmlParser.ParseException;
 import com.xml.analyzer.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class SaxXmlParser {
     @Autowired
     private SaxXmlHandler saxXmlHandler;
 
-    public Result parseXMLFromUrl(String url, XmlNode xmlNode, Result result) {
+    public Result parseXMLFromUrl(String url, XmlNode xmlNode, Result result) throws ParseException {
         saxXmlHandler.setResult(result);
         saxXmlHandler.setXmlNode(xmlNode);
 
@@ -28,8 +29,8 @@ public class SaxXmlParser {
             URL linkURL = new URL(url);
 
             sp.parse(new InputSource(linkURL.openStream()), saxXmlHandler);
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (Exception parseException) {
+            throw new ParseException(parseException.getMessage());
         }
 
         result.setAnalysisDate(Result.getAnalysisDate());

@@ -1,5 +1,6 @@
 package com.xml.analyzer.parser.posts;
 
+import com.xml.analyzer.parser.XmlParser.ParseException;
 import com.xml.analyzer.parser.posts.sax.SaxXmlParser;
 import com.xml.analyzer.result.Result;
 import org.junit.Before;
@@ -27,14 +28,14 @@ public class PostsXmlParserTest {
     private Result result;
 
     @Before
-    public void init() {
+    public void init() throws ParseException {
         MockitoAnnotations.initMocks(this);
 
         when(saxXmlParser.parseXMLFromUrl(anyString(), any(), any())).thenAnswer(invocationOnMock -> result);
     }
 
     @Test
-    public void testParseXMLFromUrl() {
+    public void testParseXMLFromUrl() throws ParseException {
         assertTrue(postsXmlParser.parseXMLFromUrl("test") != null);
     }
 }

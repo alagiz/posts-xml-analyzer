@@ -1,5 +1,6 @@
 package com.xml.analyzer.controller;
 
+import com.xml.analyzer.parser.XmlParser.ParseException;
 import com.xml.analyzer.parser.posts.PostsXmlParser;
 import com.xml.analyzer.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class XmlAnalyzerController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public Result analyzePosts(@RequestParam("url") final String url) {
+    public Result analyzePosts(@RequestParam("url") final String url) throws ParseException {
         return postsXmlParser.parseXMLFromUrl(url);
     }
 }

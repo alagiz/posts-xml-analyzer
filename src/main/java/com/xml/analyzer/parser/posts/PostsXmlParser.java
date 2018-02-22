@@ -33,7 +33,7 @@ public class PostsXmlParser extends XmlParser {
     }
 
     @Override
-    public Result parseXMLFromUrl(String url) {
+    public Result parseXMLFromUrl(String url) throws ParseException {
         return saxXmlParser.parseXMLFromUrl(url, getXmlNode(), getResult());
     }
 }
