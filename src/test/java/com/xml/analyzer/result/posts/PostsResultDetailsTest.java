@@ -71,81 +71,81 @@ public class PostsResultDetailsTest {
 
     @Test
     public void testUpdatePostCount() {
-        when(attrs.getValue("Id")).thenReturn("11");
+        when(attrs.getValue("Id")).thenReturn("0");
 
         assertEquals(postsResultDetails.getTotalPosts(), 0);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
-        assertNotEquals(postsResultDetails.getTotalPosts(), 0);
         assertEquals(postsResultDetails.getTotalPosts(), 1);
+
+        when(attrs.getValue("Id")).thenReturn("1");
 
         postsResultDetails.accumulateDetails("row", attrs);
 
-        assertNotEquals(postsResultDetails.getTotalPosts(), 1);
         assertEquals(postsResultDetails.getTotalPosts(), 2);
     }
 
     @Test
     public void testUpdateAnswerCount() {
-        when(attrs.getValue("AnswerCount")).thenReturn("11");
+        when(attrs.getValue("AnswerCount")).thenReturn("5");
+
+        assertEquals(postsResultDetails.getTotalAnswers(), 0);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
-        assertNotEquals(postsResultDetails.getTotalAnswers(), 0);
-        assertEquals(postsResultDetails.getTotalAnswers(), 11);
+        assertEquals(postsResultDetails.getTotalAnswers(), 5);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
-        assertNotEquals(postsResultDetails.getTotalAnswers(), 11);
-        assertEquals(postsResultDetails.getTotalAnswers(), 22);
+        assertEquals(postsResultDetails.getTotalAnswers(), 10);
     }
 
     @Test
     public void testUpdateAcceptedAnswersCount() {
-        when(attrs.getValue("AcceptedAnswerId")).thenReturn("23");
+        when(attrs.getValue("AcceptedAnswerId")).thenReturn("0");
 
         assertEquals(postsResultDetails.getTotalAcceptedAnswers(), 0);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
-        assertNotEquals(postsResultDetails.getTotalAcceptedAnswers(), 0);
         assertEquals(postsResultDetails.getTotalAcceptedAnswers(), 1);
+
+        when(attrs.getValue("AcceptedAnswerId")).thenReturn("1");
 
         postsResultDetails.accumulateDetails("row", attrs);
 
-        assertNotEquals(postsResultDetails.getTotalAcceptedAnswers(), 1);
         assertEquals(postsResultDetails.getTotalAcceptedAnswers(), 2);
     }
 
     @Test
     public void testUpdateCommentCount() {
-        when(attrs.getValue("CommentCount")).thenReturn("33");
+        when(attrs.getValue("CommentCount")).thenReturn("11");
+
+        assertEquals(postsResultDetails.getTotalComments(), 0);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
-        assertNotEquals(postsResultDetails.getTotalComments(), 0);
-        assertEquals(postsResultDetails.getTotalComments(), 33);
+        assertEquals(postsResultDetails.getTotalComments(), 11);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
-        assertNotEquals(postsResultDetails.getTotalComments(), 33);
-        assertEquals(postsResultDetails.getTotalComments(), 66);
+        assertEquals(postsResultDetails.getTotalComments(), 22);
     }
 
     @Test
     public void testUpdateViewCount() {
-        when(attrs.getValue("ViewCount")).thenReturn("44");
+        when(attrs.getValue("ViewCount")).thenReturn("11");
+
+        assertEquals(postsResultDetails.getTotalViews(), 0);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
-        assertNotEquals(postsResultDetails.getTotalViews(), 0);
-        assertEquals(postsResultDetails.getTotalViews(), 44);
+        assertEquals(postsResultDetails.getTotalViews(), 11);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
-        assertNotEquals(postsResultDetails.getTotalViews(), 44);
-        assertEquals(postsResultDetails.getTotalViews(), 88);
+        assertEquals(postsResultDetails.getTotalViews(), 22);
     }
 
     @Test
