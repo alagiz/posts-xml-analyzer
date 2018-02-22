@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
@@ -28,7 +29,23 @@ public class PostsXmlAnalyzerTest {
                 .respond(
                         response()
                                 .withBody("<posts>" +
-                                        "<row Id=\"1\"/>" +
+                                        "<row" +
+                                        " Id=\"0\"" +
+                                        " AnswerCount=\"5\"" +
+                                        " AcceptedAnswerId=\"2\"" +
+                                        " CommentCount=\"50\"" +
+                                        " ViewCount=\"100\"" +
+                                        " Score=\"15\"" +
+                                        " CreationDate=\"1990-01-01T00:00:00.000\" " +
+                                        "/>" +
+                                        "<row " +
+                                        " Id=\"1\"" +
+                                        " AnswerCount=\"15\"" +
+                                        " CommentCount=\"10\"" +
+                                        " ViewCount=\"200\"" +
+                                        " Score=\"25\"" +
+                                        " CreationDate=\"2000-01-01T00:00:00.000\"" +
+                                        "/>" +
                                         "</posts>")
                 );
     }
@@ -39,10 +56,14 @@ public class PostsXmlAnalyzerTest {
     @Test
     public void testAnalyzePosts() {
         Result result = xmlAnalyzerController.analyzePosts("http://127.0.0.1:1070/xml");
+        PostsResultDetails details = (PostsResultDetails) result.getResultDetails();
 
-        PostsResultDetails details = (PostsResultDetails)result.getResultDetails();
-
-        // assert that statistics is calculated correctly
-        System.out.println(details.getTotalPosts());
+        assertEquals(details.getTotalPosts(), 2);
+        assertEquals(details.getTotalAnswers(), 20);
+        assertEquals(details.getTotalAcceptedAnswers(), 1);
+        assertEquals(details.getTotalComments(), 60);
+        assertEquals(details.getTotalViews(), 300);
+        assertEquals(details.getFirstPostDate().getYear(), 1990);
+        assertEquals(details.getLastPostDate().getYear(), 2000);
     }
 }
