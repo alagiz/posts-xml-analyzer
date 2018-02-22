@@ -26,8 +26,8 @@ public class SaxXmlParser {
 
         try {
             parseStreamFromUrl(url);
-        } catch (Exception parseException) {
-            throw new ParseException(parseException.getMessage());
+        } catch (Exception e) {
+            throw new ParseException(e.getMessage());
         }
 
         result.finalizeResult();
