@@ -3,6 +3,7 @@ package com.xml.analyzer.parser.posts.sax;
 import com.xml.analyzer.node.XmlNode;
 import com.xml.analyzer.parser.XmlParser.ParseException;
 import com.xml.analyzer.result.Result;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandlerFactory;
@@ -37,8 +39,28 @@ public class SaxXmlParserTest {
 
     private static HttpUrlStreamHandler httpUrlStreamHandler;
 
+    private static void unsetURLStreamHandlerFactory() {
+        try {
+            Field field = URL.class.getDeclaredField("factory");
+
+            field.setAccessible(true);
+            field.set(null, null);
+
+            URL.setURLStreamHandlerFactory(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @AfterClass
+    public static void clearURLStreamHandlerFactory() {
+        unsetURLStreamHandlerFactory();
+    }
+
     @BeforeClass
     public static void setupURLStreamHandlerFactory() {
+        unsetURLStreamHandlerFactory();
+
         URLStreamHandlerFactory urlStreamHandlerFactory = mock(URLStreamHandlerFactory.class);
         httpUrlStreamHandler = new HttpUrlStreamHandler();
 

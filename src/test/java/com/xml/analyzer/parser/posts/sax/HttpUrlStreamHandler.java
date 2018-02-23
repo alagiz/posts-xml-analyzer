@@ -6,6 +6,9 @@ import java.net.URLStreamHandler;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * HttpUrlStreamHandler allows to mock a URLConnection.
+ */
 public class HttpUrlStreamHandler extends URLStreamHandler {
     private Map<URL, URLConnection> connections = new HashMap<>();
 
@@ -14,11 +17,11 @@ public class HttpUrlStreamHandler extends URLStreamHandler {
         return connections.get(url);
     }
 
-    public void resetConnections() {
+    void resetConnections() {
         connections = new HashMap<>();
     }
 
-    public HttpUrlStreamHandler addConnection(URL url, URLConnection urlConnection) {
+    HttpUrlStreamHandler addConnection(URL url, URLConnection urlConnection) {
         connections.put(url, urlConnection);
 
         return this;
