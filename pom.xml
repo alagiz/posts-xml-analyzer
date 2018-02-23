@@ -10,7 +10,6 @@
         <java.version>1.8</java.version>
         <mock-sever-netty-version>3.10.8</mock-sever-netty-version>
         <apache-http-version>4.4.1</apache-http-version>
-        <powermock.version>1.7.1</powermock.version>
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
         <lombok.version>1.16.16</lombok.version>
         <jackson-datatype-jsr310.version>2.7.9</jackson-datatype-jsr310.version>
@@ -50,7 +49,6 @@
             <artifactId>mockserver-netty</artifactId>
             <version>${mock-sever-netty-version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.mock-server</groupId>
             <artifactId>mockserver-client-java</artifactId>
@@ -65,18 +63,6 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
             <version>${apache-http-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
-            <version>${powermock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-mockito</artifactId>
-            <version>${powermock.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
