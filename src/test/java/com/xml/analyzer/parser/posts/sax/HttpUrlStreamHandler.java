@@ -21,9 +21,7 @@ public class HttpUrlStreamHandler extends URLStreamHandler {
         connections = new HashMap<>();
     }
 
-    HttpUrlStreamHandler addConnection(URL url, URLConnection urlConnection) {
+    void addConnection(URL url, URLConnection urlConnection) {
         connections.put(url, urlConnection);
-
-        return this;
     }
 }
