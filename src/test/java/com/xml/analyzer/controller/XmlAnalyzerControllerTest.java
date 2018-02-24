@@ -35,7 +35,7 @@ public class XmlAnalyzerControllerTest {
     }
 
     @Test
-    public void testAnalyzePosts() throws ParseException {
-        assertTrue(xmlAnalyzerController.analyzePosts("test") != null);
+    public void shouldReturnResultWhenAnalyzePostsIsCalled() throws ParseException {
+        assertTrue(xmlAnalyzerController.analyzePosts("test") == result);
     }
 }

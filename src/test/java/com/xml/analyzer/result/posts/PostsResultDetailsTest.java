@@ -26,19 +26,7 @@ public class PostsResultDetailsTest {
     }
 
     @Test
-    public void testPostInit() {
-        assertEquals(postsResultDetails.getTotalPosts(), 0);
-        assertEquals(postsResultDetails.getTotalAnswers(), 0);
-        assertEquals(postsResultDetails.getTotalAcceptedAnswers(), 0);
-        assertEquals(postsResultDetails.getTotalComments(), 0);
-        assertEquals(postsResultDetails.getTotalViews(), 0);
-        assertEquals(postsResultDetails.getAverageScore(), 0, 0);
-        assertNull(postsResultDetails.getFirstPostDate());
-        assertNull(postsResultDetails.getLastPostDate());
-    }
-
-    @Test
-    public void testResetDetails() {
+    public void shouldResetDetailsWhenResettingDetails() {
         postsResultDetails.setTotalPosts(1);
         postsResultDetails.setTotalAnswers(1);
         postsResultDetails.setTotalAcceptedAnswers(1);
@@ -70,7 +58,7 @@ public class PostsResultDetailsTest {
     }
 
     @Test
-    public void testFinalizeResultDetails() {
+    public void shouldRoundAvgScoreWhenFinalizingResultDetails() {
         postsResultDetails.setAverageScore(0.11235);
         postsResultDetails.finalizeResultDetails();
 
@@ -78,14 +66,19 @@ public class PostsResultDetailsTest {
     }
 
     @Test
-    public void testUpdatePostCount() {
+    public void shouldUpdatePostCountWhenThereIsOnePost() {
         when(attrs.getValue("Id")).thenReturn("0");
-
-        assertEquals(postsResultDetails.getTotalPosts(), 0);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
         assertEquals(postsResultDetails.getTotalPosts(), 1);
+    }
+
+    @Test
+    public void shouldUpdatePostCountWhenThereAreTwoPosts() {
+        when(attrs.getValue("Id")).thenReturn("0");
+
+        postsResultDetails.accumulateDetails("row", attrs);
 
         when(attrs.getValue("Id")).thenReturn("1");
 
@@ -95,69 +88,83 @@ public class PostsResultDetailsTest {
     }
 
     @Test
-    public void testUpdateAnswerCount() {
+    public void shouldUpdateAnswerCountWhenTheseIsOnePost() {
         when(attrs.getValue("AnswerCount")).thenReturn("5");
-
-        assertEquals(postsResultDetails.getTotalAnswers(), 0);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
         assertEquals(postsResultDetails.getTotalAnswers(), 5);
+    }
 
+    @Test
+    public void shouldUpdateAnswerCountWhenThereAreTwoPosts() {
+        when(attrs.getValue("AnswerCount")).thenReturn("5");
+
+        postsResultDetails.accumulateDetails("row", attrs);
         postsResultDetails.accumulateDetails("row", attrs);
 
         assertEquals(postsResultDetails.getTotalAnswers(), 10);
     }
 
     @Test
-    public void testUpdateAcceptedAnswersCount() {
+    public void shouldUpdateAcceptedAnswersCountWhenThereIsOnePost() {
         when(attrs.getValue("AcceptedAnswerId")).thenReturn("0");
-
-        assertEquals(postsResultDetails.getTotalAcceptedAnswers(), 0);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
         assertEquals(postsResultDetails.getTotalAcceptedAnswers(), 1);
+    }
 
-        when(attrs.getValue("AcceptedAnswerId")).thenReturn("1");
+    @Test
+    public void shouldUpdateAcceptedAnswersCountWhenThereAreTwoPosts() {
+        when(attrs.getValue("AcceptedAnswerId")).thenReturn("0");
 
+        postsResultDetails.accumulateDetails("row", attrs);
         postsResultDetails.accumulateDetails("row", attrs);
 
         assertEquals(postsResultDetails.getTotalAcceptedAnswers(), 2);
     }
 
     @Test
-    public void testUpdateCommentCount() {
+    public void shouldUpdateCommentCountWhenThereIsOnePost() {
         when(attrs.getValue("CommentCount")).thenReturn("11");
-
-        assertEquals(postsResultDetails.getTotalComments(), 0);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
         assertEquals(postsResultDetails.getTotalComments(), 11);
+    }
 
+    @Test
+    public void shouldUpdateCommentCountWhenThereAreTwoPosts() {
+        when(attrs.getValue("CommentCount")).thenReturn("11");
+
+        postsResultDetails.accumulateDetails("row", attrs);
         postsResultDetails.accumulateDetails("row", attrs);
 
         assertEquals(postsResultDetails.getTotalComments(), 22);
     }
 
     @Test
-    public void testUpdateViewCount() {
+    public void shouldUpdateViewCountWhenThereIsOnePost() {
         when(attrs.getValue("ViewCount")).thenReturn("11");
-
-        assertEquals(postsResultDetails.getTotalViews(), 0);
 
         postsResultDetails.accumulateDetails("row", attrs);
 
         assertEquals(postsResultDetails.getTotalViews(), 11);
+    }
 
+    @Test
+    public void shouldUpdateViewCountWhenThereAreTwoPosts() {
+        when(attrs.getValue("ViewCount")).thenReturn("11");
+
+        postsResultDetails.accumulateDetails("row", attrs);
         postsResultDetails.accumulateDetails("row", attrs);
 
         assertEquals(postsResultDetails.getTotalViews(), 22);
     }
 
     @Test
-    public void testUpdateAvgScore() {
+    public void shouldUpdateAvgScoreWhenThereIsOnePost() {
         when(attrs.getValue("Id")).thenReturn("0");
         when(attrs.getValue("Score")).thenReturn("5");
 
@@ -165,6 +172,14 @@ public class PostsResultDetailsTest {
 
         assertEquals(postsResultDetails.getTotalPosts(), 1);
         assertEquals(postsResultDetails.getAverageScore(), 5, 0);
+    }
+
+    @Test
+    public void shouldUpdateAvgScoreWhenThereAreTwoPosts() {
+        when(attrs.getValue("Id")).thenReturn("0");
+        when(attrs.getValue("Score")).thenReturn("5");
+
+        postsResultDetails.accumulateDetails("row", attrs);
 
         when(attrs.getValue("Id")).thenReturn("1");
         when(attrs.getValue("Score")).thenReturn("15");
@@ -176,31 +191,40 @@ public class PostsResultDetailsTest {
     }
 
     @Test
-    public void testUpdateFirstLastPostDates() {
+    public void shouldUpdateFirstLastPostDatesWhenThereIsOnePost() {
         when(attrs.getValue("CreationDate")).thenReturn("2000-01-01T00:00:00.000");
 
-        assertNull(postsResultDetails.getFirstPostDate());
-        assertNull(postsResultDetails.getLastPostDate());
-
         postsResultDetails.accumulateDetails("row", attrs);
-
-        assertNotNull(postsResultDetails.getFirstPostDate());
-        assertNotNull(postsResultDetails.getLastPostDate());
-
-        when(attrs.getValue("CreationDate")).thenReturn("2020-01-01T00:00:00.000");
 
         assertEquals(postsResultDetails.getFirstPostDate().getYear(), 2000);
         assertEquals(postsResultDetails.getLastPostDate().getYear(), 2000);
+    }
+
+    @Test
+    public void shouldUpdateFirstLastPostDatesWhenThereAreTwoPosts() {
+        when(attrs.getValue("CreationDate")).thenReturn("2000-01-01T00:00:00.000");
+
+        postsResultDetails.accumulateDetails("row", attrs);
+
+        when(attrs.getValue("CreationDate")).thenReturn("2020-01-01T00:00:00.000");
 
         postsResultDetails.accumulateDetails("row", attrs);
 
         assertEquals(postsResultDetails.getFirstPostDate().getYear(), 2000);
         assertEquals(postsResultDetails.getLastPostDate().getYear(), 2020);
+    }
+
+    @Test
+    public void shouldUpdateFirstLastPostDatesWhenThereAreThreePosts() {
+        when(attrs.getValue("CreationDate")).thenReturn("2000-01-01T00:00:00.000");
+
+        postsResultDetails.accumulateDetails("row", attrs);
+
+        when(attrs.getValue("CreationDate")).thenReturn("2020-01-01T00:00:00.000");
+
+        postsResultDetails.accumulateDetails("row", attrs);
 
         when(attrs.getValue("CreationDate")).thenReturn("1990-01-01T00:00:00.000");
-
-        assertEquals(postsResultDetails.getFirstPostDate().getYear(), 2000);
-        assertEquals(postsResultDetails.getLastPostDate().getYear(), 2020);
 
         postsResultDetails.accumulateDetails("row", attrs);
 

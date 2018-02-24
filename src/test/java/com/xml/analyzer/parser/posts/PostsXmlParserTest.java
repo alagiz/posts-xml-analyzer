@@ -35,7 +35,7 @@ public class PostsXmlParserTest {
     }
 
     @Test
-    public void testParseXMLFromUrl() throws ParseException {
-        assertTrue(postsXmlParser.parseXMLFromUrl("test") != null);
+    public void shouldReturnResultWhenParseXMLFromUrlIsCalled() throws ParseException {
+        assertTrue(postsXmlParser.parseXMLFromUrl("test") == result);
     }
 }

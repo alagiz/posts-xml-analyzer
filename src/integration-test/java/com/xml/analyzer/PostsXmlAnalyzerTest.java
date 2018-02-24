@@ -4,24 +4,33 @@ import com.xml.analyzer.controller.XmlAnalyzerController;
 import com.xml.analyzer.parser.XmlParser.ParseException;
 import com.xml.analyzer.result.Result;
 import com.xml.analyzer.result.posts.PostsResultDetails;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.mockserver.integration.ClientAndServer;
+import org.mockserver.client.server.MockServerClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertEquals;
+import static org.mockserver.integration.ClientAndServer.startClientAndServer;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = com.xml.analyzer.PostsXmlAnalyzerTestConfiguration.class)
 public class PostsXmlAnalyzerTest {
+    private static MockServerClient mockServerClient;
+
     @BeforeClass
     public static void startServer() {
-        new ClientAndServer(1070)
+        mockServerClient = startClientAndServer(1070);
+
+        mockServerClient
                 .when(
                         request()
                                 .withMethod("GET")
@@ -49,13 +58,27 @@ public class PostsXmlAnalyzerTest {
                                         "/>" +
                                         "</posts>")
                 );
+
+        mockServerClient
+                .when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/malformed-xml")
+                )
+                .respond(
+                        response()
+                                .withBody("<pos")
+                );
     }
 
     @Autowired
     private XmlAnalyzerController xmlAnalyzerController;
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
-    public void testAnalyzePosts() throws ParseException {
+    public void shouldReturnCorrectResultWhenAnalyzePostsIsCalled() throws ParseException {
         Result result = xmlAnalyzerController.analyzePosts("http://127.0.0.1:1070/xml");
         PostsResultDetails details = (PostsResultDetails) result.getResultDetails();
 
@@ -66,5 +89,26 @@ public class PostsXmlAnalyzerTest {
         assertEquals(details.getTotalViews(), 300);
         assertEquals(details.getFirstPostDate().getYear(), 1990);
         assertEquals(details.getLastPostDate().getYear(), 2000);
+    }
+
+    @Test
+    public void shouldThrowParseExceptionWithXmlMalformedMessageWhenXmlIsMalformed() throws ParseException {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(containsString("XML document structures must start and end within the same entity"));
+
+        xmlAnalyzerController.analyzePosts("http://127.0.0.1:1070/malformed-xml");
+    }
+
+    @Test
+    public void shouldThrowParseExceptionWithFileNotFoundMessageWhenLinkIsWrong() throws ParseException {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(containsString("FileNotFoundException"));
+
+        xmlAnalyzerController.analyzePosts("http://127.0.0.1:1070/wrong-link");
+    }
+
+    @AfterClass
+    public static void stopServer() {
+        mockServerClient.stop();
     }
 }

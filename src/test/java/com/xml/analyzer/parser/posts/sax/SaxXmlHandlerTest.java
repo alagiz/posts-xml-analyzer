@@ -43,7 +43,7 @@ public class SaxXmlHandlerTest {
     }
 
     @Test
-    public void testStartElementNotInsideXmlNode() throws Exception {
+    public void startElementShouldCallCorrectMethodsWhenNotInsideXmlNode() throws Exception {
         saxXmlHandler.startElement("namespaceURI", "localName", "xmlNodeName", attrs);
 
         verify(xmlNode, times(1)).getName();
@@ -52,7 +52,7 @@ public class SaxXmlHandlerTest {
     }
 
     @Test
-    public void testStartElementIsInsideXmlNode() throws Exception {
+    public void startElementShouldCallCorrectMethodsWhenIsInsideXmlNode() throws Exception {
         saxXmlHandler.startElement("namespaceURI", "localName", "xmlNodeNameInside", attrs);
 
         verify(xmlNode, times(1)).getName();
@@ -62,7 +62,7 @@ public class SaxXmlHandlerTest {
     }
 
     @Test
-    public void testEndElement() throws Exception {
+    public void endElementShouldCallCorrectMethods() throws Exception {
         saxXmlHandler.endElement("namespaceURI", "localName", "xmlNodeName");
 
         verify(xmlNode, times(1)).getName();
