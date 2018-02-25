@@ -15,6 +15,7 @@
         <jackson-datatype-jsr310.version>2.7.9</jackson-datatype-jsr310.version>
         <maven-failsafe-plugin.version>2.20.1</maven-failsafe-plugin.version>
         <mockserver-maven-plugin.version>5.3.0</mockserver-maven-plugin.version>
+        <exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
     </properties>
 
     <parent>
@@ -130,7 +131,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.5.0</version>
+                <version>${exec-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
