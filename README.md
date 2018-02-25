@@ -21,11 +21,12 @@ $ docker pull alagiz/posts-xml-analyzer
 $ docker run -p 8080:8080 alagiz/posts-xml-analyzer
 ```
 
-* Send POST request to http://localhost:8080/analyze or http://host-ip:8080/analyze in your browser.
+* Send POST request to http://localhost:8080/analyze or http://host-ip:8080/analyze in your browser
   * Include url to the xml file as a parameter:
      ```
      url: "https://somehost/posts.xml"
      ```
+
 # Usage without docker
 * Clone the github repository
 ```
@@ -35,7 +36,7 @@ https://github.com/ArtemAlagizov/posts-xml-analyzer
 ```
 $ mvn exec:java
 ```
-* Send POST request to http://localhost:8080/analyze or http://host-ip:8080/analyze in your browser.
+* Send POST request to http://localhost:8080/analyze or http://host-ip:8080/analyze in your browser
     * Include url to the xml file as a parameter:
        ```
        url: "https://somehost/posts.xml"
@@ -43,6 +44,7 @@ $ mvn exec:java
 ***
  * Supported xml file structure (every row represents a post):
  ```
+ <?xml version="1.0" encoding="utf-8"?>
  <posts>
     <row Id="1" AnswerCount="5" CreationDate="2015-07-14T20:06:44.950"/>
     <row Id="2" AnswerCount="4"/>
