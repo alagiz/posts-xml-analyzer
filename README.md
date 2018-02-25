@@ -49,7 +49,7 @@ AcceptedAnswerId (int)
 CommentCount (int)
 ViewCount (int)
 Score (int)
-CreationDate (string of the follwing format: yyyy-MM-dd'T'HH:mm:ss.SSS)
+CreationDate (string of the following format: yyyy-MM-dd'T'HH:mm:ss.SSS)
  ```
  * Analysis results example
  ```
