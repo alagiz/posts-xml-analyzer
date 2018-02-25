@@ -3,6 +3,10 @@
 
 posts-xml-analyzer is a small service able to analyze xml files of "posts" type; "posts" type is based on posts from https://archive.org/details/stackexchange.
 
+Github repository of the app: 
+````
+https://github.com/ArtemAlagizov/posts-xml-analyzer
+````
 Docker container with the app: 
 ````
 https://hub.docker.com/r/alagiz/posts-xml-analyzer/
@@ -23,7 +27,10 @@ $ docker run -p 8080:8080 alagiz/posts-xml-analyzer
      url: "https://somehost/posts.xml"
      ```
 # Usage without docker
-* Clone the repository
+* Clone the github repository
+```
+https://github.com/ArtemAlagizov/posts-xml-analyzer
+```
 * Run 
 ```
 $ mvn exec:java
