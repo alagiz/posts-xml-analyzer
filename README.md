@@ -3,18 +3,37 @@
 
 posts-xml-analyzer is a small service able to analyze xml files of "posts" type; "posts" type is based on posts from https://archive.org/details/stackexchange.
 
-# Usage example
-* Clone the project
+Docker container with the app: 
+````
+https://hub.docker.com/r/alagiz/posts-xml-analyzer/
+````
+
+# Usage with docker
+* Run
+```
+$ docker pull alagiz/posts-xml-analyzer
+```
+```
+$ docker run -p 8080:8080 alagiz/posts-xml-analyzer
+```
+
+* Send POST request to http://localhost:8080/analyze or http://host-ip:8080/analyze in your browser.
+  * Include url to the xml file as a parameter:
+     ```
+     url: "https://somehost/posts.xml"
+     ```
+# Usage without docker
+* Clone the repository
 * Run 
 ```
-$ mvn clean install
+$ mvn exec:java
 ```
-* Execute produced *.jar file
-* Send POST request to http://localhost:8080/analyze
-  * Include url to the xml file as a parameter:
-   ```
-   url: "https://somehost/posts.xml"
-   ```
+* Send POST request to http://localhost:8080/analyze or http://host-ip:8080/analyze in your browser.
+    * Include url to the xml file as a parameter:
+       ```
+       url: "https://somehost/posts.xml"
+       ```
+***
  * Supported xml file structure (every row represents a post):
  ```
  <posts>
@@ -22,7 +41,7 @@ $ mvn clean install
     <row Id="2" AnswerCount="4"/>
  </posts>
  ```
- * Supported attributes of row:
+ * Supported attributes of a row:
  ```
 Id (any type)
 AnswerCount (int)
@@ -30,7 +49,7 @@ AcceptedAnswerId (int)
 CommentCount (int)
 ViewCount (int)
 Score (int)
-CreationDate (yyyy-MM-dd'T'HH:mm:ss.SSS)
+CreationDate (string of the follwing format: yyyy-MM-dd'T'HH:mm:ss.SSS)
  ```
  * Analysis results example
  ```
