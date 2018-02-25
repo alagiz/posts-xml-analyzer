@@ -9,7 +9,7 @@ https://github.com/ArtemAlagizov/posts-xml-analyzer
 ````
 Docker container with the app: 
 ````
-https://hub.docker.com/r/alagiz/posts-xml-analyzer/
+https://hub.docker.com/r/alagiz/posts-xml-analyzer
 ````
 
 # Usage with docker
@@ -20,7 +20,6 @@ $ docker pull alagiz/posts-xml-analyzer
 ```
 $ docker run -p 8080:8080 alagiz/posts-xml-analyzer
 ```
-
 * Send POST request to http://localhost:8080/analyze or http://host-ip:8080/analyze in your browser
   * Include url to the xml file as a parameter:
      ```
