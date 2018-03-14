@@ -1,7 +1,7 @@
 # posts-xml-analyzer
 [![Build Status](https://travis-ci.org/ArtemAlagizov/posts-xml-analyzer.svg?branch=master)](https://travis-ci.org/ArtemAlagizov/posts-xml-analyzer)
 
-posts-xml-analyzer is a small service able to analyze xml files of "posts" type; "posts" type is based on posts from https://archive.org/details/stackexchange.
+posts-xml-analyzer is a small service able to analyze xml files of "post" type; "post" type is based on posts from https://archive.org/details/stackexchange.
 
 Github repository of the app: 
 ````
