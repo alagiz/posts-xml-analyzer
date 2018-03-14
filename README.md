@@ -20,7 +20,7 @@ $ docker pull alagiz/posts-xml-analyzer
 ```
 $ docker run -p 8080:8080 alagiz/posts-xml-analyzer
 ```
-* Send POST request to http://localhost:8080/analyze or http://host-ip:8080/analyze in your browser
+* Send POST request to http://localhost:8080/analyze or http://<host-ip>:8080/analyze in your browser
   * Include url to the xml file as a parameter:
      ```
      url: "https://somehost/posts.xml"
@@ -35,7 +35,7 @@ https://github.com/ArtemAlagizov/posts-xml-analyzer
 ```
 $ mvn exec:java
 ```
-* Send POST request to http://localhost:8080/analyze or http://host-ip:8080/analyze in your browser
+* Send POST request to http://localhost:8080/analyze or http://<host-ip>:8080/analyze in your browser
     * Include url to the xml file as a parameter:
        ```
        url: "https://somehost/posts.xml"
